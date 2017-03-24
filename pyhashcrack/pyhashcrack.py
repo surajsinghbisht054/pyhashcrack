@@ -42,70 +42,13 @@ import sys
 import time
 
 
-class hashcrack:
-	def __init__(self, hashfile, wordlist, salt):
-		self.salt = salt
-		self.hashfile = hashfile
-		self.wordlist = wordlist
-		self.starttime = time.ctime()
-		self.open_and_get_file_data()
-		self.start_hash_cracking()
-		self.closetime = time.ctime()
-		
-	def encrypt_salt(self, string):
-		if self.salt=="md5":
-			return hashlib.md5(string).hexdigest()
-		if self.salt=="sha1":
-			return hashlib.sha1(string).hexdigest()
-		if self.salt=="sha224":
-			return hashlib.sha224(string).hexdigest()
-		if self.salt=="sha256":
-			return hashlib.sha256(string).hexdigest()
-		if self.salt=="sha384":
-			return hashlib.sha384(string).hexdigest()
-		if self.salt=="sha512":
-			return hashlib.sha512(string).hexdigest()
-		else:
-			print "[+] Something Wrong In Encryption."
-			return sys.exit(0)
-		
-	
-		
-		
-	def start_hash_cracking(self):
-		got_hash = []
-		for i in self.words:
-			if self.encrypt_salt(i.strip("\n")) in self.hashlist:
-				print i
-				got_hash.append(i.strip("\n"))
-				if len(got_hash)==len(self.hashlist):
-					break
-		return
-	
-	def open_and_get_file_data(self):
-		hashlist = open(self.hashfile,'r')
-		wordlist = open(self.wordlist, 'r')		
-		self.hashlist = [i.strip('\n') for i in hashlist.xreadlines()] 
-		self.words = wordlist.xreadlines()
-
-		return
-		
-		
-
-
-def main():
-	input_file = "hash.txt"
-	input_wordlist = "dict.txt"
-	hashcrack(input_file, input_wordlist,"md5")
-	return 
-
-
-
 class hash_crack_engine:
 	def __init__(self):
+		self.starttime = time.time()
 		self.extract_input_data()
 		self.open_and_get_file_data()
 		self.start_cracking_engine()
+		self.closetime = time.time()
 		self.close_all_process()
 		
 
@@ -122,6 +65,7 @@ class hash_crack_engine:
 				self.got_hash.append(i.strip("\n"))
 				if len(self.got_hash)==len(self.hashlist):
 					break
+			self.pwdtries = self.pwdtries + 1
 		return
 
 	def extract_input_data(self):
@@ -170,6 +114,14 @@ class hash_crack_engine:
 
 	def close_all_process(self):
 		self.result.close()
+		self.time_management()
+		return
+		
+	def time_management(self):
+		print "[*]	Starting Time ",self.starttime
+		print "[*]	Closing  Time ",self.closetime
+		print "[*]	Password Try  ",self.pwdtries
+		print "[*]	Average Speed ",self.pwdtries/(self.closetime-self.starttime)
 		return
 
 # main trigger function
