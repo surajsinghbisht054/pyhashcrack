@@ -55,6 +55,17 @@ class hash_crack_engine:
 	def encrypt_salt(self, string):
 		if self.salt=="md5":
 			return hashlib.md5(string).hexdigest()
+		if self.salt=="sha1":
+			return hashlib.sha1(string).hexdigest()
+		if self.salt=="sha224":
+			return hashlib.sha224(string).hexdigest()
+		if self.salt=="sha256":
+			return hashlib.sha256(string).hexdigest()
+		if self.salt=="sha384":
+			return hashlib.sha384(string).hexdigest()
+		if self.salt=="sha512":
+			return hashlib.sha512(string).hexdigest()
+
 
 	def start_cracking_engine(self):
 		self.got_hash = []
