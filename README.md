@@ -1,23 +1,12 @@
-# pyhashcrack
-## Python Hash Cracking Script
-# This Script Is Created For http://bitforestinfo.blogspot.in
-# This Script is Written By
-__author__='''
+## Python Hash Cracking Scrip
 
-######################################################
-                By S.S.B Group                          
-######################################################
-
+```
     Suraj Singh
     Admin
     S.S.B Group
     surajsinghbisht054@gmail.com
     http://bitforestinfo.blogspot.in/
-
-    Note: We Feel Proud To Be Indian
-######################################################
-'''
-
+```
 ## Option
 
 ```
